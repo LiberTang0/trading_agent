@@ -10,8 +10,8 @@ import time
 from alpaca_trade_api.stream import Stream
 
 # Your API credentials
-API_KEY = 'PKG66F7DKPJEO2H1HHF3'
-API_SECRET = 'P2GAROcozlav3c8EnaNhNqp26xa7DB3ELInUjTXw'
+API_KEY = ''
+API_SECRET = ''
 
 def run_stream_in_thread():
     """Run the stream in a separate thread with its own event loop."""
