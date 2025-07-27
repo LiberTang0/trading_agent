@@ -1,0 +1,9 @@
+alpaca-trade-api>=3.0.0
+alpaca-py>=0.13.0
+pandas
+numpy
+scikit-learn
+matplotlib
+yfinance
+websockets
+psutil
