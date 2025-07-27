@@ -144,10 +144,10 @@ def execute_trading_agent_loop(api, model, scaler, X_columns, initial_capital=10
             logger.info(f"Executing trading agent iteration #{iteration_count}...")
             
             # Check if market is open (optional - you can remove this for 24/7 forex trading)
-            if not check_market_hours():
-                logger.info("Market is closed. Waiting for next iteration...")
-                time.sleep(interval_seconds)
-                continue
+            #if not check_market_hours():
+            #    logger.info("Market is closed. Waiting for next iteration...")
+            #    time.sleep(interval_seconds)
+            #    continue
 
             # Generate trading signal using the data buffer
             signal, current_price, predicted_price = trading_strategy_from_stream(model, scaler, X_columns)

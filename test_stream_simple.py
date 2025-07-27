@@ -7,8 +7,8 @@ import asyncio
 import sys
 
 # Your API credentials
-API_KEY = ''
-API_SECRET = ''
+API_KEY = 'PKG66F7DKPJEO2H1HHF3'
+API_SECRET = 'P2GAROcozlav3c8EnaNhNqp26xa7DB3ELInUjTXw'
 
 def test_imports():
     """Test different Alpaca imports."""
@@ -16,11 +16,11 @@ def test_imports():
     
     try:
         from alpaca_trade_api.stream import Stream
-        print("✅ alpaca_trade_api.stream imported successfully")
+        print("[PASS] alpaca_trade_api.stream imported successfully")
         
         # Test creating stream object
         stream = Stream(API_KEY, API_SECRET, data_feed='sip')
-        print("✅ Stream object created successfully")
+        print("[PASS] Stream object created successfully")
         
         # Check available attributes
         print(f"Stream object attributes: {dir(stream)}")
@@ -28,15 +28,15 @@ def test_imports():
         return "alpaca_trade_api"
         
     except Exception as e:
-        print(f"❌ alpaca_trade_api error: {e}")
+        print(f"[FAIL] alpaca_trade_api error: {e}")
     
     try:
         from alpaca.data.stream import StockDataStream
-        print("✅ alpaca.data.stream imported successfully")
+        print("[PASS] alpaca.data.stream imported successfully")
         return "alpaca-py"
         
     except Exception as e:
-        print(f"❌ alpaca-py error: {e}")
+        print(f"[FAIL] alpaca-py error: {e}")
     
     return None
 
@@ -51,15 +51,15 @@ async def test_alpaca_trade_api():
         
         # Define handlers
         async def on_connect():
-            print("✅ Connected!")
+            print("[PASS] Connected!")
             try:
                 await stream.subscribe_trades('SPY')
-                print("✅ Subscribed to SPY")
+                print("[PASS] Subscribed to SPY")
             except Exception as e:
-                print(f"❌ Subscribe error: {e}")
+                print(f"[FAIL] Subscribe error: {e}")
         
         async def on_trade(trade):
-            print(f"📊 Trade: {trade.symbol} @ ${trade.price}")
+            print(f"[DATA] Trade: {trade.symbol} @ ${trade.price}")
         
         # Set handlers
         stream.on_connect = on_connect
@@ -69,7 +69,7 @@ async def test_alpaca_trade_api():
         await stream.run()
         
     except Exception as e:
-        print(f"❌ Stream error: {e}")
+        print(f"[FAIL] Stream error: {e}")
 
 async def test_alpaca_py():
     """Test the newer alpaca-py."""
@@ -86,7 +86,7 @@ async def test_alpaca_py():
         data_stream = StockDataStream(API_KEY, API_SECRET)
         
         async def on_trade(trade):
-            print(f"📊 Trade: {trade.symbol} @ ${trade.price}")
+            print(f"[DATA] Trade: {trade.symbol} @ ${trade.price}")
         
         data_stream.subscribe_trades(on_trade, "SPY")
         
@@ -94,7 +94,7 @@ async def test_alpaca_py():
         await data_stream.run()
         
     except Exception as e:
-        print(f"❌ Stream error: {e}")
+        print(f"[FAIL] Stream error: {e}")
 
 def main():
     """Main function."""
@@ -109,20 +109,20 @@ def main():
         try:
             asyncio.run(asyncio.wait_for(test_alpaca_trade_api(), timeout=15))
         except asyncio.TimeoutError:
-            print("⏰ Test completed")
+            print("[TIME] Test completed")
         except Exception as e:
-            print(f"❌ Test failed: {e}")
+            print(f"[FAIL] Test failed: {e}")
     
     elif api_type == "alpaca-py":
         try:
             asyncio.run(asyncio.wait_for(test_alpaca_py(), timeout=15))
         except asyncio.TimeoutError:
-            print("⏰ Test completed")
+            print("[TIME] Test completed")
         except Exception as e:
-            print(f"❌ Test failed: {e}")
+            print(f"[FAIL] Test failed: {e}")
     
     else:
-        print("❌ No compatible Alpaca API found")
+        print("[FAIL] No compatible Alpaca API found")
     
     print("=" * 60)
 

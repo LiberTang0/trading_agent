@@ -10,8 +10,8 @@ import time
 from alpaca_trade_api.stream import Stream
 
 # Your API credentials
-API_KEY = ''
-API_SECRET = ''
+API_KEY = 'PKG66F7DKPJEO2H1HHF3'
+API_SECRET = 'P2GAROcozlav3c8EnaNhNqp26xa7DB3ELInUjTXw'
 
 def run_stream_in_thread():
     """Run the stream in a separate thread with its own event loop."""
@@ -25,27 +25,27 @@ def run_stream_in_thread():
             
             # Define event handlers
             async def on_connected():
-                print("✅ Successfully connected to Alpaca stream!")
+                print("[PASS] Successfully connected to Alpaca stream!")
                 try:
                     # Test with a simple symbol
                     await stream.subscribe_trades('SPY')
-                    print("✅ Successfully subscribed to SPY trades")
+                    print("[PASS] Successfully subscribed to SPY trades")
                     
                     # Test forex symbol
                     await stream.subscribe_trades('EUR')
-                    print("✅ Successfully subscribed to EUR trades")
+                    print("[PASS] Successfully subscribed to EUR trades")
                     
                 except Exception as e:
-                    print(f"❌ Error subscribing to symbols: {e}")
+                    print(f"[FAIL] Error subscribing to symbols: {e}")
             
             async def handle_trade(trade):
-                print(f"📊 Received trade: {trade.symbol} @ ${trade.price}")
+                print(f"[DATA] Received trade: {trade.symbol} @ ${trade.price}")
             
             async def handle_error(error):
-                print(f"❌ Stream error: {error}")
+                print(f"[ERROR] Stream error: {error}")
             
             async def handle_disconnected():
-                print("🔌 Stream disconnected")
+                print("[INFO] Stream disconnected")
             
             # Register event handlers
             stream.on_connect = on_connected
@@ -57,7 +57,7 @@ def run_stream_in_thread():
             loop.run_until_complete(stream.run())
             
         except Exception as e:
-            print(f"❌ Failed to create stream: {e}")
+            print(f"[FAIL] Failed to create stream: {e}")
         finally:
             loop.close()
     
@@ -80,12 +80,12 @@ def main():
         print("Waiting 30 seconds for stream data...")
         time.sleep(30)
         
-        print("\n⏰ Test completed after 30 seconds")
+        print("\n[TIME] Test completed after 30 seconds")
         
     except KeyboardInterrupt:
-        print("\n🛑 Test stopped by user")
+        print("\n[STOP] Test stopped by user")
     except Exception as e:
-        print(f"\n❌ Test failed: {e}")
+        print(f"\n[FAIL] Test failed: {e}")
     
     print("=" * 50)
 
