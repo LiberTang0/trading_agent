@@ -7,8 +7,8 @@ import asyncio
 import sys
 
 # Your API credentials
-API_KEY = 'PKG66F7DKPJEO2H1HHF3'
-API_SECRET = 'P2GAROcozlav3c8EnaNhNqp26xa7DB3ELInUjTXw'
+API_KEY = ''
+API_SECRET = ''
 
 def test_imports():
     """Test different Alpaca imports."""
